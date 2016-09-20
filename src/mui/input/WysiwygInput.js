@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import Quill from 'quill';
+import RichTextEditor from 'react-rte';
 
 const labelStyle = {
     color: 'rgba(0, 0, 0, 0.498039)',
@@ -8,32 +8,35 @@ const labelStyle = {
     fontWeight: 'normal',
 };
 
-require('quill/dist/quill.snow.css');
-
 class WysiwygInput extends Component {
-    init(container) {
-        if (!container || this.quill) {
-            return;
+    handleChange(value) {
+        this.setState({ value });
+        this.props.onChange(this.props.source, value.toString('html'));
+    }
+
+    initialValue() {
+        const { record, source } = this.props;
+
+        if (!record[source]) {
+            return RichTextEditor.createEmptyValue();
         }
 
-        this.quill = new Quill(container, {
-            modules: {
-                toolbar: true,
-            },
-            theme: 'snow',
-        });
+        return RichTextEditor.createValueFromString(record[source], 'html');
     }
 
-    handleChange(newContent) {
-        this.props.onChange(this.props.source, newContent);
-    }
+    state = {
+        value: this.initialValue(),
+    };
 
     render() {
         const { label } = this.props;
 
         return (<div>
             <p style={labelStyle}>{label}</p>
-            <div ref={::this.init} />
+            <RichTextEditor
+                value={this.state.value}
+                onChange={::this.handleChange}
+            />
         </div>);
     }
 }
