@@ -94,7 +94,7 @@ class Datagrid extends Component {
                         ))}
                     </tr>
                 </thead>
-                <tbody style={styles.tbody}>
+                <tbody style={styles.tbody} className="datagrid-body">
                     {ids.map((id, rowIndex) => (
                         <tr style={rowStyle ? rowStyle(data[id], rowIndex) : styles.tr} key={id}>
                             {React.Children.map(children, (field, index) => (
