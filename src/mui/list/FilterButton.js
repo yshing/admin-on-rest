@@ -54,7 +54,13 @@ export class FilterButton extends Component {
     render() {
         const hiddenFilters = this.getHiddenFilters();
         return (hiddenFilters.length > 0 && <div style={{ display: 'inline-block' }}>
-            <FlatButton primary label="Add Filter" icon={<ContentFilter />} onTouchTap={this.handleTouchTap} />
+            <FlatButton
+                className="add-filter"
+                primary
+                label="Add Filter"
+                icon={<ContentFilter />}
+                onTouchTap={this.handleTouchTap}
+            />
             <Popover
                 open={this.state.open}
                 anchorEl={this.state.anchorEl}
@@ -64,7 +70,13 @@ export class FilterButton extends Component {
             >
                 <Menu>
                     {hiddenFilters.map(filterElement =>
-                        <MenuItem data-key={filterElement.props.source} key={filterElement.props.source} primaryText={title(filterElement.props.label, filterElement.props.source)} onTouchTap={this.handleShow} />
+                        <MenuItem
+                            className="new-filter-item"
+                            data-key={filterElement.props.source}
+                            key={filterElement.props.source}
+                            primaryText={title(filterElement.props.label, filterElement.props.source)}
+                            onTouchTap={this.handleShow}
+                        />
                     )}
                 </Menu>
             </Popover>
