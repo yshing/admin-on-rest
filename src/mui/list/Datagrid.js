@@ -99,6 +99,7 @@ class Datagrid extends Component {
                         <tr style={rowStyle ? rowStyle(data[id], rowIndex) : styles.tr} key={id}>
                             {React.Children.map(children, (field, index) => (
                                 <DatagridCell
+                                    className={`column-${field.props.source}`}
                                     key={`${id}-${field.props.source || index}`}
                                     record={data[id]}
                                     defaultStyle={index === 0 ? styles.cell['td:first-child'] : styles.cell.td}
