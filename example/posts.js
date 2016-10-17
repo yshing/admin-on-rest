@@ -97,7 +97,7 @@ export const PostEdit = (props) => (
                     });
                 */
                 console.table(files);
-                setTimeout(done, 1500);
+                setTimeout(done, 2500);
             }}
             accept="image/*"
         />
