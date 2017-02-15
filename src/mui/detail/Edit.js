@@ -123,7 +123,7 @@ Edit.propTypes = {
     params: PropTypes.object.isRequired,
     resource: PropTypes.string.isRequired,
     title: PropTypes.any,
-    translate: PropTypes.func,
+    translate: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state, props) {

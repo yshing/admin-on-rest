@@ -2,6 +2,7 @@ import React from 'react';
 import { IndexRoute, Route } from 'react-router';
 import { createRoutesFromReactChildren } from 'react-router/lib/RouteUtils';
 import pure from 'recompose/pure';
+import Translate from './i18n/translate'
 
 const CrudRoute = () => <div>&lt;CrudRoute&gt; elements are for configuration only and should not be rendered</div>;
 
@@ -11,11 +12,11 @@ CrudRoute.createRouteFromReactElement = (element, parentRoute) => {
     // dynamically add crud routes
     const crudRoute = createRoutesFromReactChildren(
         <Route path={path}>
-            {list && <IndexRoute component={list} onEnter={onEnter({ resource: path, route: 'list' })} />}
-            {create && <Route path="create" component={create} onEnter={onEnter({ resource: path, route: 'create' })} />}
-            {edit && <Route path=":id" component={edit} onEnter={onEnter({ resource: path, route: 'edit', scrollToTop: true })} />}
-            {show && <Route path=":id/show" component={show} onEnter={onEnter({ resource: path, route: 'show', scrollToTop: true })} />}
-            {remove && <Route path=":id/delete" component={remove} onEnter={onEnter({ resource: path, route: 'delete' })} />}
+            {list && <IndexRoute component={Translate(list)} onEnter={onEnter({ resource: path, route: 'list' })} />}
+            {create && <Route path="create" component={Translate(create)} onEnter={onEnter({ resource: path, route: 'create' })} />}
+            {edit && <Route path=":id" component={Translate(edit)} onEnter={onEnter({ resource: path, route: 'edit', scrollToTop: true })} />}
+            {show && <Route path=":id/show" component={Translate(show)} onEnter={onEnter({ resource: path, route: 'show', scrollToTop: true })} />}
+            {remove && <Route path=":id/delete" component={Translate(remove)} onEnter={onEnter({ resource: path, route: 'delete' })} />}
         </Route>,
         parentRoute,
     )[0];

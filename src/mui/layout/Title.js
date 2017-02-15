@@ -8,7 +8,7 @@ const Title = ({ defaultTitle, record, title, translate }) => {
     if (typeof title === 'string') {
         return <span>{title}</span>;
     }
-    return React.cloneElement(title, { record });
+    return React.cloneElement(title, { record, translate });
 };
 
 Title.propTypes = {
