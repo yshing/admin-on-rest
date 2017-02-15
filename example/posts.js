@@ -29,7 +29,6 @@ import {
     TextInput,
 } from 'admin-on-rest/mui';
 import RichTextInput from 'aor-rich-text-input';
-import { translate } from 'admin-on-rest';
 import Chip from 'material-ui/Chip';
 export PostIcon from 'material-ui/svg-icons/action/book';
 
@@ -58,9 +57,9 @@ export const PostList = ({ ...props }) => (
     </List>
 );
 
-const PostTitle = translate(({ record, translate }) => {
-    return <span>{record ? translate('post.edit.title', { title: record.title }) : ''}</span>;
-});
+const PostTitle = ({ record, translate }) => (
+    <span>{record ? translate('post.edit.title', { _: 'Post "%{title}"', title: record.title }) : ''}</span>
+);
 
 export const PostCreate = ({ ...props }) => (
     <Create {...props}>
@@ -92,7 +91,7 @@ export const PostCreate = ({ ...props }) => (
 export const PostEdit = ({ ...props }) => (
     <Edit title={<PostTitle />} {...props}>
         <TabbedForm defaultValue={{ average_note: 0 }}>
-            <FormTab label="post.form.summary">
+            <FormTab label={props.translate('post.form.summary', { _: 'Summary' })}>
                 <DisabledInput source="id" />
                 <TextInput source="title" validation={{ required: true }} />
                 <CheckboxGroupInput
@@ -108,17 +107,17 @@ export const PostEdit = ({ ...props }) => (
                     <ImageField source="src" title="title" />
                 </ImageInput>
             </FormTab>
-            <FormTab label="post.form.body">
+            <FormTab label={props.translate('post.form.body', { _: 'Body' })}>
                 <RichTextInput source="body" label="" validation={{ required: true }} addLabel={false} />
             </FormTab>
-            <FormTab label="post.form.miscellaneous">
+            <FormTab label={props.translate('post.form.miscellaneous', { _: 'Miscellaneous' })}>
                 <TextInput source="password" type="password" />
                 <DateInput source="published_at" />
                 <NumberInput source="average_note" validation={{ min: 0 }} />
                 <BooleanInput source="commentable" defaultValue />
                 <DisabledInput source="views" />
             </FormTab>
-            <FormTab label="post.form.comments">
+            <FormTab label={props.translate('post.form.comments', { _: 'Comments' })}>
                 <ReferenceManyField reference="comments" target="post_id" addLabel={false}>
                     <Datagrid>
                         <DateField source="created_at" />
