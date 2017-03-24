@@ -11,8 +11,6 @@ import translate from '../../i18n/translate';
  * Turns a children data structure (either single child or array of children) into an array.
  * We can't use React.Children.toArray as it loses references.
  */
-const arrayizeChildren = children => (Array.isArray(children) ? children : [children]);
-
 export class Edit extends Component {
     constructor(props) {
         super(props);
@@ -38,18 +36,6 @@ export class Edit extends Component {
         if (this.props.id !== nextProps.id) {
             this.updateData(nextProps.resource, nextProps.id);
         }
-    }
-
-    // FIXME Seems that the cloneElement in CrudRoute slices the children array, which makes this necessary to avoid rerenders
-    shouldComponentUpdate(nextProps) {
-        if (nextProps.isLoading !== this.props.isLoading) {
-            return true;
-        }
-
-        const currentChildren = arrayizeChildren(this.props.children);
-        const newChildren = arrayizeChildren(nextProps.children);
-
-        return newChildren.every((child, index) => child === currentChildren[index]);
     }
 
     getBasePath() {
