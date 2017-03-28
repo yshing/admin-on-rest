@@ -11,7 +11,7 @@ const DeleteButton = ({ basePath = '', label , record = {}, translate, disabled 
     icon={<ActionDelete />}
     containerElement={!disabled?<Link to={`${linkToRecord(basePath, record.id)}/delete`} />:<div />}
     style={{ overflow: 'inherit' }}
-    disabled
+    disabled={disabled}
 />;
 
 DeleteButton.propTypes = {

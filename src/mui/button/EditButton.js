@@ -12,7 +12,7 @@ const EditButton = ({ basePath = '', label, record = {}, translate, disabled }) 
     icon={<ContentCreate />}
     containerElement={!disabled?<Link to={linkToRecord(basePath, record.id)} />:<div />}
     style={{ overflow: 'inherit' }}
-    disabled
+    disabled={disabled}
 />;
 
 EditButton.propTypes = {

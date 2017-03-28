@@ -11,7 +11,7 @@ const ShowButton = ({ basePath = '', label, record = {}, translate, disabled }) 
     icon={<ImageEye />}
     containerElement={!disabled?<Link to={`${linkToRecord(basePath, record.id)}/show`} />:<div />}
     style={{ overflow: 'inherit' }}
-    disabled
+    disabled={disabled}
 />;
 
 ShowButton.propTypes = {
